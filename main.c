@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //** ENGR-2350 Template Project 
-//** NAME: Xio Pelaez Cuacua
-//** RIN: 662068537
+//** NAME: Gizelle Ojeda-Ericksen and Xio Pelaez Cuacua
+//** RIN: 662065015 and  662068537
 //** This is the base project for several activities and labs throughout
 //** the course.  The outline provided below isn't necessarily *required*
 //** by a C program; however, this format is required within ENGR-2350
@@ -40,27 +40,48 @@ void GPIOInit() {
     P5DIR &= ~0x40; // P5.6
     P3DIR &= ~0x20; // Set P3.5
     P6DIR |= 0x03; // Set P6.0 and P6.1 (led)
-    P4DIR |= 0x80; //P4.7
+    P4DIR |= 0x00; //P4.7
     P8DIR |= 0x01; //P8.0
     P3DIR |= 0x80; //P3.7
     P5DIR |= 0x10; //P5.4
     P4DIR |= 0x01; //P4.0
     P8DIR |= 0x20; //P8.5
     P3DIR |= 0x40; //P3.6
-    P5DIR &= ~0x20; //P5.5
+    P5DIR |= 0x20; //P5.5
 }
 
 void TestIO() {
     // Add printf statement(s) for testing inputs
-
+   // printf(P5IN & 0x40);
+    //printf(P3IN & 0x20);
+    printf("start");
     // Example code for testing outputs
     while(1){
         uint8_t cmd = getchar();
         if(cmd == 'a'){
+            printf("a");
             // Turn LEDL On
+            P8OUT |= 0x01;
         }else if(cmd == 'z'){
+            printf("z");
             // Turn LEDL Off
-        }// ...
+            P8OUT |= 0x01;
+        }else if (cmd == 's'){
+            printf("s");
+            P8OUT &= 0x20;
+        }else if (cmd == 'x'){
+            printf("x");
+            P8OUT |= 0x20;
+        }else if (cmd == 'q'){
+            printf("q");
+            P6OUT |= 0x01;
+        }else if (cmd == 'w'){
+            printf("w");
+            P6OUT |= 0x03;
+        }else if (cmd == 'e'){
+            printf("e");
+            P6OUT |= 0x02;
+        }
     }
 }
 
