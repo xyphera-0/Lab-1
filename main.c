@@ -65,22 +65,24 @@ void TestIO() {
         }else if(cmd == 'z'){
             printf("z");
             // Turn LEDL Off
-            P8OUT |= 0x01;
+            P8OUT &= ~0x01;
         }else if (cmd == 's'){
             printf("s");
-            P8OUT &= 0x20;
+            P8OUT |= 0x20;
         }else if (cmd == 'x'){
             printf("x");
-            P8OUT |= 0x20;
+            P8OUT &= ~0x20;
         }else if (cmd == 'q'){
             printf("q");
             P6OUT |= 0x01;
+            P6OUT &= ~0x02;
         }else if (cmd == 'w'){
             printf("w");
             P6OUT |= 0x03;
         }else if (cmd == 'e'){
             printf("e");
             P6OUT |= 0x02;
+            P6OUT &= ~0x01;
         }
     }
 }
