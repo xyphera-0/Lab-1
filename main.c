@@ -36,7 +36,18 @@ int main(void) {    /** Main Function ****/
 }    /** End Main Function ****/
 
 void GPIOInit() {
-    P6DIR = 0x// Add initializations of inputs and outputs
+    // Add initializations of inputs and outputs
+    P5DIR &= ~0x40; // P5.6
+    P3DIR &= ~0x20; // Set P3.5
+    P6DIR |= 0x03; // Set P6.0 and P6.1 (led)
+    P4DIR |= 0x80; //P4.7
+    P8DIR |= 0x01; //P8.0
+    P3DIR |= 0x80; //P3.7
+    P5DIR |= 0x10; //P5.4
+    P4DIR |= 0x01; //P4.0
+    P8DIR |= 0x20; //P8.5
+    P3DIR |= 0x40; //P3.6
+    P5DIR &= ~0x20; //P5.5
 }
 
 void TestIO() {
