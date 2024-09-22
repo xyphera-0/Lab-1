@@ -89,8 +89,32 @@ void TestIO() {
 }
 
 void ControlSystem() {
-    if(P3IN & 0x20 != 0){ //is the ss1 is on
-        if()
+    if(P3IN & 0x20 != 0){ //the ss1 is on
+        if() { // has pattern started
+            if() { //turn on green if no
+                P6OUT |= 0x02;
+                P6OUT &= ~0x01;
+            }else if() {//turn on red if yes
+                P6OUT |= 0x01;
+                P6OUT &= ~0x02;
+            }
+        }else if() { //pattern has not started, start pattern
 
+    }
+} else if() { //ss1 is off
+    P6OUT |= 0x03;
+    if() { // BMPx pressed, yes
+        //add segment pattern
+
+        //togle state of ledfr/l
+    } else if() { // BMPx pressed, no
+        if() { //PB1 pressed, yes
+            //remove last segment
+
+            //wait fro release
+        }else if() { //PB1 pressed, no
+
+        }
+    }
     }
 }
