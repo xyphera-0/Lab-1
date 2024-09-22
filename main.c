@@ -89,7 +89,6 @@ void TestIO() {
 }
 
 void ControlSystem() {
-    void init_Sequence(void);
     if(P3IN & 0x20 != 0){ //the ss1 is on
         if() { // has pattern started,
             if() { //is pattern complete, turn on green if no, they give code
