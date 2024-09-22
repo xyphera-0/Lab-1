@@ -30,8 +30,8 @@ int main(void) {    /** Main Function ****/
            "===========\r\n");
 
     while(1) {
-        TestIO(); // Used in Part A to test the IO
-        //ControlSystem(); // Used in Part B to implement the desired functionality
+        //TestIO(); // Used in Part A to test the IO
+        ControlSystem(); // Used in Part B to implement the desired functionality
     }
 }    /** End Main Function ****/
 
@@ -39,6 +39,7 @@ void GPIOInit() {
     // Add initializations of inputs and outputs
     P5DIR &= ~0x40; // P5.6
     P3DIR &= ~0x20; // Set P3.5
+
     P6DIR |= 0x03; // Set P6.0 and P6.1 (led)
     P4DIR |= 0x00; //P4.7
     P8DIR |= 0x01; //P8.0
@@ -88,5 +89,8 @@ void TestIO() {
 }
 
 void ControlSystem() {
+    if(P3IN & 0x20 != 0){ //is the ss1 is on
+        if()
 
+    }
 }
