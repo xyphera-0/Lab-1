@@ -89,28 +89,29 @@ void TestIO() {
 }
 
 void ControlSystem() {
+    void init_Sequence(void);
     if(P3IN & 0x20 != 0){ //the ss1 is on
-        if() { // has pattern started
-            if() { //turn on green if no
+        if() { // has pattern started,
+            if() { //is pattern complete, turn on green if no, they give code
                 P6OUT |= 0x02;
                 P6OUT &= ~0x01;
-            }else if() {//turn on red if yes
+            }else if() {//is pattern complete, turn on red if yes, they give code
                 P6OUT |= 0x01;
                 P6OUT &= ~0x02;
             }
-        }else if() { //pattern has not started, start pattern
+        }else if() { //pattern has not started, start pattern they give code
 
     }
 } else if() { //ss1 is off
     P6OUT |= 0x03;
     if() { // BMPx pressed, yes
-        //add segment pattern
+        //add segment pattern, give code
 
         //togle state of ledfr/l
     } else if() { // BMPx pressed, no
         if() { //PB1 pressed, yes
-            //remove last segment
-
+            //remove last segment, give code
+            uint8_t pop_Segment(void);
             //wait fro release
         }else if() { //PB1 pressed, no
 
