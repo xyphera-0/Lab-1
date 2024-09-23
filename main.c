@@ -18,9 +18,6 @@ void ControlSystem();
 uint8_t LEDFL = 0; // Two variables to store the state of
 uint8_t LEDFR = 0; // the front left/right LEDs (on-car)
 
-uint8_t biLEDColor = 0; // 0: Off, 1: Green, 2: Red
-uint8_t patternRunning = 0;
-
 int main(void) {    /** Main Function ****/
 
     SysInit(); // Basic car initialization
@@ -44,7 +41,7 @@ void GPIOInit() {
     P3DIR &= ~0x20; // Set P3.5
 
     P6DIR |= 0x03; // Set P6.0 and P6.1 (led)
-    P4DIR |= 0x00; //P4.7
+    P4DIR |= 0x80; //P4.7
     P8DIR |= 0x01; //P8.0
     P3DIR |= 0x80; //P3.7
     P5DIR |= 0x10; //P5.4
