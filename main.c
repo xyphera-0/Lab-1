@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //** ENGR-2350 Template Project 
-//** NAME: Gizelle Ojeda-Ericksen and Xio Pelaez Cuacua
-//** RIN: 662065015 and  662068537
+//** NAME: Xio Pelaez Cuacua
+//** RIN: 662068537
 //** This is the base project for several activities and labs throughout
 //** the course.  The outline provided below isn't necessarily *required*
 //** by a C program; however, this format is required within ENGR-2350
@@ -17,6 +17,9 @@ void ControlSystem();
 
 uint8_t LEDFL = 0; // Two variables to store the state of
 uint8_t LEDFR = 0; // the front left/right LEDs (on-car)
+
+uint8_t biLEDColor = 0; // 0: Off, 1: Green, 2: Red
+uint8_t patternRunning = 0;
 
 int main(void) {    /** Main Function ****/
 
@@ -91,28 +94,45 @@ void TestIO() {
 void ControlSystem() {
     if(P3IN & 0x20 != 0){ //the ss1 is on
         if() { // has pattern started,
-            if() { //is pattern complete, turn on green if no, they give code
+            if(return != 0) { //is pattern complete, turn on green if no, they give code
                 P6OUT |= 0x02;
                 P6OUT &= ~0x01;
             }else if() {//is pattern complete, turn on red if yes, they give code
                 P6OUT |= 0x01;
                 P6OUT &= ~0x02;
+                }
             }
-        }else if() { //pattern has not started, start pattern they give code
-
+        else if(patternRunning) { //pattern has not started, start pattern they give code
+            uint8_t run_Sequence(void);
+       }
     }
-} else if() { //ss1 is off
-    P6OUT |= 0x03;
-    if() { // BMPx pressed, yes
-        //add segment pattern, give code
+    else if(P3IN & 0x20 == 0) { //ss1 is off
+        P6OUT |= 0x03;
+        if(pattenRunning != 0) { // BMPx pressed, yes
+            for() // everytime a button is pressed
+                int8_t record_Segment(int8_t -2);  // BMP5
+                int8_t record_Segment(int8_t -1);  // BMP4
+                int8_t record_Segment(int8_t 0);   // BMP2
+                int8_t record_Segment(int8_t 1);   // BMP1
+                int8_t record_Segment(int8_t 2);   // BMP0
+                int8_t record_Segment(int8_t 127); // BMP3
 
-        //togle state of ledfr/l
-    } else if() { // BMPx pressed, no
-        if() { //PB1 pressed, yes
-            //remove last segment, give code
-            uint8_t pop_Segment(void);
-            //wait fro release
-        }else if() { //PB1 pressed, no
+            if(){ //for every segment added, lights turn off or on
+                P8OUT |= 0x01; //turns on
+                P8OUT |= 0x20;
+            else if() {
+                P8OUT &= ~0x01; //turns off
+                P8OUT |= ~0x20;
+                }
+            }
+        }
+        else if() { // BMPx pressed, no
+            if(P5IN & 0x40 != 0) { //PB1 pressed, yes
+                uint8_t pop_Segment(void); //remove last segment, give code
+
+                //wait for release
+
+           }else if() { //PB1 pressed, no
 
         }
     }
