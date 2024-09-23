@@ -17,6 +17,7 @@ void ControlSystem();
 
 uint8_t LEDFL = 0; // Two variables to store the state of
 uint8_t LEDFR = 0; // the front left/right LEDs (on-car)
+uint8_t patternRunning = 0;
 
 int main(void) {    /** Main Function ****/
 
