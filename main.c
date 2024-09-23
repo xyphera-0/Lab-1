@@ -121,13 +121,13 @@ void ControlSystem() {
                 record_Segment(-2);  // BMP5 P4.7 90 left
            }
         }
-            //if(){ //for every segment added, lights turn off or on
-            //    P8OUT |= 0x01; //turns on
-            //    P8OUT |= 0x20;
-            //else if() {
-            //    P8OUT &= ~0x01; //turns off
-            //    P8OUT |= ~0x20;
-            //    }
+            if(P8OUT &= ~0x01 & P8OUT |= ~0x20){ //for every segment added, lights turn off or on
+                P8OUT |= 0x01; //turns on
+                P8OUT |= 0x20;
+            else() {
+                P8OUT &= ~0x01; //turns off
+                P8OUT |= ~0x20;
+                }
 
             patternRunning = 1;
             int8_t status_Segment(void);
