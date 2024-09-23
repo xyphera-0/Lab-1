@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////
 //** ENGR-2350 Template Project 
-//** NAME: Xio Pelaez Cuacua
+//** NAME: Xio Pelaez Cuacua & Gizelle Ojeda
 //** RIN: 662068537
 //** This is the base project for several activities and labs throughout
 //** the course.  The outline provided below isn't necessarily *required*
@@ -33,8 +33,8 @@ int main(void) {    /** Main Function ****/
            "===========\r\n");
 
     while(1) {
-        //TestIO(); // Used in Part A to test the IO
-        ControlSystem(); // Used in Part B to implement the desired functionality
+        TestIO(); // Used in Part A to test the IO
+        //ControlSystem(); // Used in Part B to implement the desired functionality
     }
 }    /** End Main Function ****/
 
@@ -93,11 +93,11 @@ void TestIO() {
 
 void ControlSystem() {
     if(P3IN & 0x20 != 0){ //the ss1 is on
-        if() { // has pattern started,
-            if(return != 0) { //is pattern complete, turn on green if no, they give code
+        if(patternRunning != 0) { // has pattern started,
+            if(status_Sequence != 100) { //is pattern complete, turn on green if no, they give code
                 P6OUT |= 0x02;
                 P6OUT &= ~0x01;
-            }else if() {//is pattern complete, turn on red if yes, they give code
+            }else if(status_Sequence == 100) {//is pattern complete, turn on red if yes, they give code
                 P6OUT |= 0x01;
                 P6OUT &= ~0x02;
                 }
@@ -108,33 +108,46 @@ void ControlSystem() {
     }
     else if(P3IN & 0x20 == 0) { //ss1 is off
         P6OUT |= 0x03;
-        if(pattenRunning != 0) { // BMPx pressed, yes
-            for() // everytime a button is pressed
-                int8_t record_Segment(int8_t -2);  // BMP5
-                int8_t record_Segment(int8_t -1);  // BMP4
-                int8_t record_Segment(int8_t 0);   // BMP2
-                int8_t record_Segment(int8_t 1);   // BMP1
-                int8_t record_Segment(int8_t 2);   // BMP0
-                int8_t record_Segment(int8_t 127); // BMP3
-
-            if(){ //for every segment added, lights turn off or on
-                P8OUT |= 0x01; //turns on
-                P8OUT |= 0x20;
-            else if() {
-                P8OUT &= ~0x01; //turns off
-                P8OUT |= ~0x20;
-                }
-            }
+        if(patternRunning != 0) { // BMPx pressed, yes
+            if(P4IN & 0x01!= 0){ // everytime a button is pressed
+                record_Segment(2);   // BMP0 P4.0 90 right
+           }else if(P4IN & 0x04!= 0){
+                record_Segment(1);   // BMP1 P4.2 45 right
+           }else if(P4IN & 0x08!= 0){
+                record_Segment(0);   // BMP2 P4.3 drive straight
+           }else if(P4IN & 0x20!= 0){
+                record_Segment(127); // BMP3 P4.5 stop for 1s
+           }else if(P4IN & 0x40!= 0){
+                record_Segment(1);  // BMP4 P4.6 45 left
+           }else if(P4IN & 0x80!= 0){
+                record_Segment(-2);  // BMP5 P4.7 90 left
+           }
         }
-        else if() { // BMPx pressed, no
+            //if(){ //for every segment added, lights turn off or on
+            //    P8OUT |= 0x01; //turns on
+            //    P8OUT |= 0x20;
+            //else if() {
+            //    P8OUT &= ~0x01; //turns off
+            //    P8OUT |= ~0x20;
+            //    }
+
+            patternRunning = 1;
+            int8_t status_Segment(void);
+            uint8_t run_Sequence(void);
+    }
+        else if(patternRunning != 0) { // BMPx pressed, no
             if(P5IN & 0x40 != 0) { //PB1 pressed, yes
                 uint8_t pop_Segment(void); //remove last segment, give code
+                patternRunning = 1;
+                uint8_t run_Sequence(void);
 
                 //wait for release
 
-           }else if() { //PB1 pressed, no
+           }else if(P5IN & 0x40 == 0) { //PB1 pressed, no
+
+
 
         }
     }
     }
-}
+
