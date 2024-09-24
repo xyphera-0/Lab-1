@@ -61,15 +61,23 @@ void GPIOInit() {
 
 
     P6DIR |= 0x03; // Set P6.0 and P6.1 (led)
-    P8DIR |= 0x01; //P8.0
-    P3DIR |= 0x80; //P3.7
-    P5DIR |= 0x10; //P5.4
-    P8DIR |= 0x20; //P8.5
-    P3DIR |= 0x40; //P3.6
-    P5DIR |= 0x20; //P5.5
+//    P8DIR |= 0x01; //P8.0
+//    P3DIR |= 0x80; //P3.7
+//    P5DIR |= 0x10; //P5.4
+//    P8DIR |= 0x20; //P8.5
+//    P3DIR |= 0x40; //P3.6
+//    P5DIR |= 0x20; //P5.5
 
-    GPIO_setAsOutputPin(GPIO_PORT_P8, GPIO_PIN5);
-    GPIO_setAsOutputPin(GPIO_PORT_P8, GPIO_PIN0);
+    GPIO_setAsOutputPin(GPIO_PORT_P8, GPIO_PIN5); //P8.5 ledfr
+    GPIO_setAsOutputPin(GPIO_PORT_P8, GPIO_PIN0); //8.0 ledfl
+    GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_PIN7); //3.7 left motor on
+    GPIO_setAsOutputPin(GPIO_PORT_P5, GPIO_PIN4); //5.4 left direction
+    GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_PIN6); //3.6 rught motor on
+    GPIO_setAsOutputPin(GPIO_PORT_P5, GPIO_PIN5); //5.5 right direction
+
+//    GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN5); //5.5 right direction
+//    GPIO_setOutputHighOnPin(GPIO_PORT_P5, GPIO_PIN4); //5.5 left direction
+
 }
 
 void TestIO() {
@@ -128,6 +136,8 @@ void ControlSystem() {
                 P6OUT |= 0x01;
                 P6OUT &= ~0x02;
                 run_Sequence();
+                uint8_t total = get_SequenceLength();
+                if()
              }
     }
         else if(patternRunning) { //pattern has not started, start pattern they give code
@@ -143,7 +153,7 @@ void ControlSystem() {
             //printf("getting here\r\n");
             while(!BMP0){
                 BMP0 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN0);
-                record_Segment(2); // BMP0 P4.0 90 right
+                record_Segment(0); // BMP0 P4.0 90 right
                 printf("bmp0 pressed\r\n");
                 if(LEDFL |= 0x01){
                     LEDFL &= ~0x01;
@@ -246,18 +256,19 @@ void ControlSystem() {
 //            int8_t status_Segment(void);
 //            uint8_t run_Sequence(void);
     }
-        else if(patternRunning != 0) { // BMPx pressed, no
-            if(P5IN & 0x40 != 0) { //PB1 pressed, yes
+       // else if(patternRunning != 0) { // BMPx pressed, no
+            if(P5IN & 0x40 == 0) { //PB1 pressed, yes
+                printf("PB1 is pressed");
                 uint8_t pop_Segment(void); //remove last segment, give code
                 patternRunning = 1;
                 uint8_t run_Sequence(void);
 
                 //wait for release
 
-           }else if(P5IN & 0x40 == 0) { //PB1 pressed, no
-               run_Sequence();
+           }else if(P5IN & 0x40 != 0) { //PB1 pressed, no
+               //run_Sequence();
 
 
         }
-    }
-    }
+
+}
