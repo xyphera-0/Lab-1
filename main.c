@@ -127,7 +127,7 @@ void ControlSystem() {
     LEDFR = GPIO_getInputPinValue(GPIO_PORT_P8,GPIO_PIN5);
     LEDFL = GPIO_getInputPinValue(GPIO_PORT_P8,GPIO_PIN0);
     if((P3IN & 0x20) == 0){ //the ss1 is on
-      // putchar('A');
+      putchar('A');
         //if(patternRunning != 0) { // has pattern started,
             if(status_Sequence() != 100) { //is pattern complete, turn on green if no, they give code
                 P6OUT |= 0x02;
@@ -137,7 +137,6 @@ void ControlSystem() {
                 P6OUT &= ~0x02;
                 run_Sequence();
                 uint8_t total = get_SequenceLength();
-                if()
              }
     }
         else if(patternRunning) { //pattern has not started, start pattern they give code
@@ -151,61 +150,10 @@ void ControlSystem() {
       //  if(patternRunning != 0) { // BMPx pressed, yes
         if(!BMP0){ // everytime a button is pressed
             //printf("getting here\r\n");
-            while(!BMP0){
-                BMP0 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN0);
-                record_Segment(0); // BMP0 P4.0 90 right
-                printf("bmp0 pressed\r\n");
-                if(LEDFL |= 0x01){
-                    LEDFL &= ~0x01;
-                    LEDFR |= 0x20;
-                }else if (LEDFR |= 0x20) {
-                    LEDFR &= ~0x01;
-                    LEDFL |= 0x01;
-                }else{
-                    LEDFR |= 0x01;
-                }
-            }
-
             __delay_cycles(240e3);
-       }
-        if(!BMP1){
-           while(!BMP1){
-               BMP1 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN2);
-               record_Segment(1);  // BMP1 P4.2 45 right
-               printf("bmp1 pressed\r\n");
-               if(LEDFL |= 0x01){
-                   LEDFL &= ~0x01;
-                   LEDFR |= 0x20;
-               }else if (LEDFR |= 0x20) {
-                   LEDFR &= ~0x01;
-                   LEDFL |= 0x01;
-               }else{
-                   LEDFR |= 0x01;
-               }
-           }
 
-           __delay_cycles(240e3);
-        }else if(!BMP2){
-           while(!BMP2) {
-               BMP2 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN3);
-               record_Segment(0);   // BMP2 P4.3 drive straight
-               printf("bmp2 pressed\r\n");
-               if(LEDFL |= 0x01){
-                   LEDFL &= ~0x01;
-                   LEDFR |= 0x20;
-               }else if (LEDFR |= 0x20) {
-                   LEDFR &= ~0x01;
-                   LEDFL |= 0x01;
-               }else{
-                   LEDFR |= 0x01;
-                               }
-           }
-           __delay_cycles(240e3);
-       }else if(!BMP3){
-           while(!BMP3) {
-            BMP3 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN5);
-            record_Segment(127); // BMP3 P4.5 stop for 1s
-            printf("bmp3 pressed\r\n");
+            record_Segment(0); // BMP0 P4.0 90 right
+            printf("bmp0 pressed\r\n");
             if(LEDFL |= 0x01){
                 LEDFL &= ~0x01;
                 LEDFR |= 0x20;
@@ -215,13 +163,34 @@ void ControlSystem() {
             }else{
                 LEDFR |= 0x01;
             }
-           }
+            while(!BMP0){
+                BMP0 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN0);
+            }
+
             __delay_cycles(240e3);
-       }else if(!BMP4){
-           while(!BMP4) {
-               BMP4 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN6);
-               record_Segment(-1);  // BMP4 P4.6 45 left
-               printf("bmp4 pressed\r\n");
+       }
+        if(!BMP1){
+            __delay_cycles(240e3);
+            record_Segment(1);  // BMP1 P4.2 45 right
+                   printf("bmp1 pressed\r\n");
+                   if(LEDFL |= 0x01){
+                       LEDFL &= ~0x01;
+                       LEDFR |= 0x20;
+                   }else if (LEDFR |= 0x20) {
+                       LEDFR &= ~0x01;
+                       LEDFL |= 0x01;
+                   }else{
+                       LEDFR |= 0x01;
+                   }
+           while(!BMP1){
+               BMP1 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN2);
+           }
+
+           __delay_cycles(240e3);
+        }else if(!BMP2){
+            __delay_cycles(240e3);
+            record_Segment(0);   // BMP2 P4.3 drive straight
+            printf("bmp2 pressed\r\n");
                if(LEDFL |= 0x01){
                    LEDFL &= ~0x01;
                    LEDFR |= 0x20;
@@ -231,22 +200,59 @@ void ControlSystem() {
                }else{
                    LEDFR |= 0x01;
                                }
+           while(!BMP2) {
+               BMP2 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN3);
+           }
+           __delay_cycles(240e3);
+       }else if(!BMP3){
+           __delay_cycles(240e3);
+           record_Segment(127); // BMP3 P4.5 stop for 1s
+                  printf("bmp3 pressed\r\n");
+                  if(LEDFL |= 0x01){
+                      LEDFL &= ~0x01;
+                      LEDFR |= 0x20;
+                  }else if (LEDFR |= 0x20) {
+                      LEDFR &= ~0x01;
+                      LEDFL |= 0x01;
+                  }else{
+                      LEDFR |= 0x01;
+                  }
+           while(!BMP3) {
+            BMP3 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN5);
+           }
+            __delay_cycles(240e3);
+       }else if(!BMP4){
+           __delay_cycles(240e3);
+           record_Segment(-1);  // BMP4 P4.6 45 left
+              printf("bmp4 pressed\r\n");
+              if(LEDFL |= 0x01){
+                  LEDFL &= ~0x01;
+                  LEDFR |= 0x20;
+              }else if (LEDFR |= 0x20) {
+                  LEDFR &= ~0x01;
+                  LEDFL |= 0x01;
+              }else{
+                  LEDFR |= 0x01;
+                              }
+           while(!BMP4) {
+               BMP4 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN6);
            }
             __delay_cycles(240e3);
        }else if(!BMP5){
+           __delay_cycles(240e3);
+           record_Segment(-2);  // BMP5 P4.7 90 left
+                 printf("bmp5 pressed\r\n");
+                 if(LEDFL |= 0x01){
+                     LEDFL &= ~0x01;
+                     LEDFR |= 0x20;
+                 }else if (LEDFR |= 0x20) {
+                     LEDFR &= ~0x01;
+                     LEDFL |= 0x01;
+                 }else{
+                     LEDFR |= 0x01;
+                 }
            while(!BMP5) {
                BMP5 = GPIO_getInputPinValue(GPIO_PORT_P4,GPIO_PIN7);
-               record_Segment(-2);  // BMP5 P4.7 90 left
-               printf("bmp5 pressed\r\n");
-               if(LEDFL |= 0x01){
-                   LEDFL &= ~0x01;
-                   LEDFR |= 0x20;
-               }else if (LEDFR |= 0x20) {
-                   LEDFR &= ~0x01;
-                   LEDFL |= 0x01;
-               }else{
-                   LEDFR |= 0x01;
-               }
            }
             __delay_cycles(240e3);
 
@@ -272,3 +278,4 @@ void ControlSystem() {
         }
 
 }
+
